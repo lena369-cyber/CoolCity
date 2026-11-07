@@ -1167,6 +1167,22 @@
   margin-bottom: 2rem;
 }
 
+.pledge-input--wide {
+  grid-column: span 2;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.newsletter-input {
+  min-width: 260px;
+  flex: 1;
+}
+
 .pledge-input {
   background: var(--color-forest-800);
   border: 1px solid var(--border-glass);

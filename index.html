@@ -53,7 +53,7 @@
           </svg>
         </button>
 
-        <a href="#map" class="btn btn-primary btn-sm">
+        <a href="#map" class="btn btn-primary btn-sm nav-cta-btn">
           Simulate Heat <span class="icon-arrow" aria-hidden="true">↗</span>
         </a>
 
@@ -64,206 +64,219 @@
             <span></span>
             <span></span>
           </span>
-          <span>Menu</span>
+          <span class="hamburger-text">Menu</span>
         </button>
       </div>
     </nav>
   </header>
 
-  <!-- Dim Backdrop Overlay -->
+  <!-- Dim Backdrop Overlay (Click outside to close sidebar) -->
   <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
 
-  <!-- Modern Icon-Based Slide-in Navigation Drawer (Works on Mobile & Desktop) -->
+  <!-- Standard Vertical Sidebar Navigation Menu (Slide-in from Right to Left, White/Light Green) -->
   <aside id="mobile-drawer" class="nav-drawer" aria-label="Main Navigation Menu">
-    <div>
-      <!-- Drawer Header -->
-      <div class="drawer-header">
-        <a href="#home" class="brand-logo" style="font-size: 1.25rem;">
+    <!-- Drawer Header -->
+    <div class="drawer-header">
+      <div class="drawer-brand-wrap">
+        <a href="#home" class="drawer-logo" aria-label="CoolCity Home">
           COOLCITY <span class="dot"></span>
         </a>
-        <button id="drawer-close" class="drawer-close-btn" type="button" aria-label="Close Navigation Menu">
-          ✕
-        </button>
+        <span class="drawer-badge">NAV</span>
       </div>
-
-      <!-- Icon-Based Menu Items (9 items with matching Lucide icons) -->
-      <ul class="nav-drawer-links">
-        
-        <!-- 1. Home — house icon -->
-        <li>
-          <a href="#home" class="nav-drawer-item mobile-drawer-link">
-            <span class="nav-drawer-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#123820" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/>
-                <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-              </svg>
-            </span>
-            <div class="nav-drawer-label">
-              <span class="nav-drawer-title">Home</span>
-              <span class="nav-drawer-sub">01 // Overview</span>
-            </div>
-            <span class="nav-drawer-arrow">→</span>
-          </a>
-        </li>
-
-        <!-- 2. Global View — globe icon -->
-        <li>
-          <a href="#map" class="nav-drawer-item mobile-drawer-link" data-action="global-view">
-            <span class="nav-drawer-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#123820" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
-                <path d="M2 12h20"/>
-              </svg>
-            </span>
-            <div class="nav-drawer-label">
-              <span class="nav-drawer-title">Global View</span>
-              <span class="nav-drawer-sub">02 // Earth Overview</span>
-            </div>
-            <span class="nav-drawer-arrow">→</span>
-          </a>
-        </li>
-
-        <!-- 3. Global Heat Map — map icon -->
-        <li>
-          <a href="#map" class="nav-drawer-item mobile-drawer-link">
-            <span class="nav-drawer-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#123820" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/>
-                <path d="M15 5.764v15"/>
-                <path d="M9 3.236v15"/>
-              </svg>
-            </span>
-            <div class="nav-drawer-label">
-              <span class="nav-drawer-title">Global Heat Map</span>
-              <span class="nav-drawer-sub">03 // Hotspot Telemetry</span>
-            </div>
-            <span class="nav-drawer-arrow">→</span>
-          </a>
-        </li>
-
-        <!-- 4. Heat Insights — thermometer-sun icon -->
-        <li>
-          <a href="#about" class="nav-drawer-item mobile-drawer-link">
-            <span class="nav-drawer-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#123820" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 9a4 4 0 0 0-2 7.5"/>
-                <path d="M12 3v2"/>
-                <path d="M6.6 18.4l-1.4 1.4"/>
-                <path d="M20 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/>
-                <path d="M4 13H2"/>
-                <path d="M6.34 7.34 4.93 5.93"/>
-              </svg>
-            </span>
-            <div class="nav-drawer-label">
-              <span class="nav-drawer-title">Heat Insights</span>
-              <span class="nav-drawer-sub">04 // UHI Phenomenon</span>
-            </div>
-            <span class="nav-drawer-arrow">→</span>
-          </a>
-        </li>
-
-        <!-- 5. Green Solutions — leaf icon -->
-        <li>
-          <a href="#solutions" class="nav-drawer-item mobile-drawer-link">
-            <span class="nav-drawer-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#123820" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
-                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
-              </svg>
-            </span>
-            <div class="nav-drawer-label">
-              <span class="nav-drawer-title">Green Solutions</span>
-              <span class="nav-drawer-sub">05 // Bioclimatic Blueprint</span>
-            </div>
-            <span class="nav-drawer-arrow">→</span>
-          </a>
-        </li>
-
-        <!-- 6. Our Impact — chart-no-axes-combined icon -->
-        <li>
-          <a href="#impact" class="nav-drawer-item mobile-drawer-link">
-            <span class="nav-drawer-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#123820" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 16v5"/>
-                <path d="M16 14v7"/>
-                <path d="M20 10v11"/>
-                <path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15"/>
-                <path d="M4 18v3"/>
-                <path d="M8 14v7"/>
-              </svg>
-            </span>
-            <div class="nav-drawer-label">
-              <span class="nav-drawer-title">Our Impact</span>
-              <span class="nav-drawer-sub">06 // Quantitative Metrics</span>
-            </div>
-            <span class="nav-drawer-arrow">→</span>
-          </a>
-        </li>
-
-        <!-- 7. Community — users icon -->
-        <li>
-          <a href="#community" class="nav-drawer-item mobile-drawer-link">
-            <span class="nav-drawer-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#123820" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-              </svg>
-            </span>
-            <div class="nav-drawer-label">
-              <span class="nav-drawer-title">Community</span>
-              <span class="nav-drawer-sub">07 // Mobilization &amp; Pledges</span>
-            </div>
-            <span class="nav-drawer-arrow">→</span>
-          </a>
-        </li>
-
-        <!-- 8. Eco Quiz — brain icon -->
-        <li>
-          <a href="#quiz" class="nav-drawer-item mobile-drawer-link">
-            <span class="nav-drawer-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#123820" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/>
-                <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/>
-                <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/>
-                <path d="M12 18v4"/>
-                <path d="M12 5V2"/>
-              </svg>
-            </span>
-            <div class="nav-drawer-label">
-              <span class="nav-drawer-title">Eco Quiz</span>
-              <span class="nav-drawer-sub">08 // Heat Diagnostic</span>
-            </div>
-            <span class="nav-drawer-arrow">→</span>
-          </a>
-        </li>
-
-        <!-- 9. Contact Us — mail icon -->
-        <li>
-          <a href="#contact" class="nav-drawer-item mobile-drawer-link">
-            <span class="nav-drawer-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#123820" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="20" height="16" x="2" y="4" rx="2"/>
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-              </svg>
-            </span>
-            <div class="nav-drawer-label">
-              <span class="nav-drawer-title">Contact Us</span>
-              <span class="nav-drawer-sub">09 // Transmit Inquiry</span>
-            </div>
-            <span class="nav-drawer-arrow">→</span>
-          </a>
-        </li>
-
-      </ul>
+      <button id="drawer-close" class="drawer-close-btn" type="button" aria-label="Close Navigation Menu">
+        ✕
+      </button>
     </div>
+
+    <!-- Standard Vertical Menu List (Single Column, NOT a grid, NOT cards, NOT horizontal) -->
+    <ul class="nav-drawer-links">
+      
+      <!-- 1. Home — elegant architectural home icon -->
+      <li>
+        <a href="#home" class="nav-drawer-item mobile-drawer-link active">
+          <span class="nav-drawer-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 10.5 12 3l9 7.5"/>
+              <path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/>
+              <path d="M10 21v-6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v6"/>
+              <line x1="18" y1="4.5" x2="18" y2="7.5"/>
+            </svg>
+          </span>
+          <div class="nav-drawer-label">
+            <span class="nav-drawer-title">Home</span>
+            <span class="nav-drawer-sub">01 // Architectural Overview</span>
+          </div>
+          <span class="nav-drawer-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+
+      <!-- 2. Global View — artistic globe with longitude and latitude -->
+      <li>
+        <a href="#map" class="nav-drawer-item mobile-drawer-link" data-action="global-view">
+          <span class="nav-drawer-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9.5"/>
+              <ellipse cx="12" cy="12" rx="4.5" ry="9.5"/>
+              <line x1="2.5" y1="12" x2="21.5" y2="12"/>
+              <path d="M4.5 7.5c2.3 1.2 5 1.5 7.5 1.5s5.2-.3 7.5-1.5"/>
+              <path d="M4.5 16.5c2.3-1.2 5-1.5 7.5-1.5s5.2.3 7.5 1.5"/>
+            </svg>
+          </span>
+          <div class="nav-drawer-label">
+            <span class="nav-drawer-title">Global View</span>
+            <span class="nav-drawer-sub">02 // Earth Overview</span>
+          </div>
+          <span class="nav-drawer-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+
+      <!-- 3. Global Heat Map — map with location pin -->
+      <li>
+        <a href="#map" class="nav-drawer-item mobile-drawer-link">
+          <span class="nav-drawer-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19 3 21V6l6-2 6 2v2"/>
+              <path d="M9 4v15"/>
+              <path d="M15 14v7l6-2V8"/>
+              <path d="M18 2.5a3 3 0 0 0-3 3c0 2.2 3 5 3 5s3-2.8 3-5a3 3 0 0 0-3-3z"/>
+              <circle cx="18" cy="5.5" r="1" fill="currentColor"/>
+            </svg>
+          </span>
+          <div class="nav-drawer-label">
+            <span class="nav-drawer-title">Global Heat Map</span>
+            <span class="nav-drawer-sub">03 // Hotspot Telemetry</span>
+          </div>
+          <span class="nav-drawer-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+
+      <!-- 4. Heat Insights — sun combined with thermometer -->
+      <li>
+        <a href="#about" class="nav-drawer-item mobile-drawer-link">
+          <span class="nav-drawer-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 4.5a2 2 0 0 0-4 0v9.7a3.5 3.5 0 1 0 4 0V4.5z"/>
+              <circle cx="16" cy="18" r="1.5" fill="currentColor"/>
+              <line x1="16" y1="10.5" x2="16" y2="16.5"/>
+              <path d="M10 9a4.5 4.5 0 0 0-2 7.2"/>
+              <line x1="8" y1="3" x2="8" y2="5"/>
+              <line x1="3" y1="8" x2="5" y2="8"/>
+              <line x1="2" y1="13" x2="4" y2="13"/>
+              <line x1="4.5" y1="4.5" x2="6" y2="6"/>
+            </svg>
+          </span>
+          <div class="nav-drawer-label">
+            <span class="nav-drawer-title">Heat Insights</span>
+            <span class="nav-drawer-sub">04 // UHI Phenomenon</span>
+          </div>
+          <span class="nav-drawer-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+
+      <!-- 5. Green Solutions — creative growing leaf or sprout -->
+      <li>
+        <a href="#solutions" class="nav-drawer-item mobile-drawer-link">
+          <span class="nav-drawer-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22v-9"/>
+              <path d="M12 13a6 6 0 0 1 6-6c1.5 0 3 .5 4 1.5-1 3.5-3.5 5.5-7 5.5"/>
+              <path d="M12 16a5.5 5.5 0 0 0-5.5-5.5C5 10.5 3.5 11 2.5 12c1 3 3 4.5 6 4.5"/>
+              <line x1="5" y1="22" x2="19" y2="22"/>
+            </svg>
+          </span>
+          <div class="nav-drawer-label">
+            <span class="nav-drawer-title">Green Solutions</span>
+            <span class="nav-drawer-sub">05 // Bioclimatic Blueprint</span>
+          </div>
+          <span class="nav-drawer-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+
+      <!-- 6. Our Impact — stylish environmental analytics chart -->
+      <li>
+        <a href="#impact" class="nav-drawer-item mobile-drawer-link">
+          <span class="nav-drawer-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 20h18"/>
+              <path d="M6 16v4"/>
+              <path d="M10 11v9"/>
+              <path d="M14 14v6"/>
+              <path d="M18 7v13"/>
+              <path d="m4 11 5-5 4 4 7-7"/>
+              <polyline points="16 3 20 3 20 7"/>
+            </svg>
+          </span>
+          <div class="nav-drawer-label">
+            <span class="nav-drawer-title">Our Impact</span>
+            <span class="nav-drawer-sub">06 // Quantitative Metrics</span>
+          </div>
+          <span class="nav-drawer-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+
+      <!-- 7. Community — connected people icon -->
+      <li>
+        <a href="#community" class="nav-drawer-item mobile-drawer-link">
+          <span class="nav-drawer-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="7" r="3"/>
+              <path d="M7.5 19a4.5 4.5 0 0 1 9 0"/>
+              <circle cx="5" cy="9" r="2.2"/>
+              <path d="M1.5 19a3.5 3.5 0 0 1 6-2"/>
+              <circle cx="19" cy="9" r="2.2"/>
+              <path d="M16.5 17a3.5 3.5 0 0 1 6 2"/>
+            </svg>
+          </span>
+          <div class="nav-drawer-label">
+            <span class="nav-drawer-title">Community</span>
+            <span class="nav-drawer-sub">07 // Mobilization &amp; Pledges</span>
+          </div>
+          <span class="nav-drawer-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+
+      <!-- 8. Eco Quiz — creative leaf with question mark -->
+      <li>
+        <a href="#quiz" class="nav-drawer-item mobile-drawer-link">
+          <span class="nav-drawer-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 21c4.5 0 8.5-3.5 8.5-9 0-4-2.5-7.5-6.5-9.5-3 3-5 5-6.5 8.5C6.5 13 6 15 6 17c0 2.2 2.7 4 6 4z"/>
+              <path d="M12 21v-3"/>
+              <path d="M10.5 9.5a2 2 0 1 1 3 1.7c-.8.6-1.5 1.1-1.5 2.3"/>
+              <circle cx="12" cy="16.5" r="0.8" fill="currentColor"/>
+            </svg>
+          </span>
+          <div class="nav-drawer-label">
+            <span class="nav-drawer-title">Eco Quiz</span>
+            <span class="nav-drawer-sub">08 // Heat Diagnostic</span>
+          </div>
+          <span class="nav-drawer-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+
+      <!-- 9. Contact Us — elegant paper-plane or envelope icon -->
+      <li>
+        <a href="#contact" class="nav-drawer-item mobile-drawer-link">
+          <span class="nav-drawer-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m21.5 2.5-19 8 7 3.5 3.5 7 8.5-18.5Z"/>
+              <path d="M9.5 14 21.5 2.5"/>
+            </svg>
+          </span>
+          <div class="nav-drawer-label">
+            <span class="nav-drawer-title">Contact Us</span>
+            <span class="nav-drawer-sub">09 // Transmit Inquiry</span>
+          </div>
+          <span class="nav-drawer-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+
+    </ul>
 
     <!-- Drawer Footer -->
     <div class="drawer-footer">
-      <div>STATUS: <span style="color:var(--color-lime-500); font-weight:700;">ACTIVE TELEMETRY</span></div>
-      <div class="live-utc-clock" style="color:var(--color-lime-500);">2026-11-07 00:00:00 UTC</div>
+      <div>STATUS: <span class="drawer-status-badge">ONLINE</span></div>
+      <div class="live-utc-clock">2026-11-07 00:00:00 UTC</div>
     </div>
   </aside>
 
@@ -1062,8 +1075,8 @@
           <form id="community-pledge-form" class="pledge-form-row">
             <input type="text" id="pledge-name" class="pledge-input" placeholder="Your Name or Team" required>
             <input type="text" id="pledge-district" class="pledge-input" placeholder="District or Postal Code" required>
-            <input type="text" id="pledge-text" class="pledge-input" placeholder="My pledge: (e.g. Planting 2 shade trees in front yard)" required style="grid-column: span 2;">
-            <button type="submit" class="btn btn-primary">
+            <input type="text" id="pledge-text" class="pledge-input pledge-input--wide" placeholder="My pledge: (e.g. Planting 2 shade trees in front yard)" required>
+            <button type="submit" class="btn btn-primary pledge-submit-btn">
               Post Pledge ✦
             </button>
           </form>
@@ -1336,8 +1349,8 @@
           <h3 style="font-size: 1.8rem;">SUBSCRIBE TO WEEKLY MICROCLIMATE LOGS</h3>
           <p style="font-size: 0.95rem; color: var(--color-text-muted);">Receive satellite infrared updates, tree canopy grants, and local cooling events.</p>
         </div>
-        <form id="newsletter-form" style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-          <input type="email" class="pledge-input" placeholder="Enter your email" required style="min-width: 280px;">
+        <form id="newsletter-form" class="newsletter-form">
+          <input type="email" class="pledge-input newsletter-input" placeholder="Enter your email" required>
           <button type="submit" class="btn btn-primary">Subscribe ✦</button>
         </form>
       </div>

@@ -1,8 +1,86 @@
 /* ==========================================================================
-   COOLCITY — RESPONSIVE STYLES & MEDIA QUERIES
+   COOLCITY — COMPLETE RESPONSIVE SYSTEM (MOBILE, TABLET, LAPTOP, DESKTOP)
    ========================================================================== */
 
-/* Laptop & Tablet Landscape (<= 1024px) */
+/* Prevent horizontal overflow globally */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   1. LAPTOPS & MEDIUM SCREENS (<= 1200px)
+   Fixes the header bar collision and bento card width on laptops (1024–1200px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1200px) {
+  /* Header Navbar: Reduce nav link gaps to prevent 1370px overflow */
+  .nav-links {
+    display: none; /* Accessible seamlessly via the Menu button! */
+  }
+
+  .nav-actions .nav-cta-btn {
+    display: inline-flex;
+  }
+
+  .header-nav {
+    max-width: 680px;
+    padding: 0.5rem 1rem 0.5rem 1.4rem;
+  }
+
+  /* Bento 4-card statistics: switch to 2x2 grid so numbers like 184,000 MWh fit */
+  .bento-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.25rem;
+  }
+  .col-12 { grid-column: span 6; }
+  .col-8 { grid-column: span 6; }
+  .col-7 { grid-column: span 6; }
+  .col-6 { grid-column: span 6; }
+  .col-5 { grid-column: span 6; }
+  .col-4 { grid-column: span 3; }
+  .col-3 { grid-column: span 3; }
+
+  /* Map Workspace: stack map on top, telemetry below for rich readability */
+  .map-workspace {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .map-viewport-wrapper {
+    min-height: 520px;
+    height: 520px;
+  }
+
+  .map-telemetry {
+    border-left: none;
+    border-top: 1px solid var(--border-glass);
+    padding: 2rem;
+  }
+
+  /* Solutions & Events: 2 columns */
+  .solutions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .events-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pledge-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Simulator */
+  .simulator-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. TABLET LANDSCAPE & SMALL LAPTOPS (<= 1024px)
+   -------------------------------------------------------------------------- */
 @media (max-width: 1024px) {
   .hero-grid {
     grid-template-columns: 1fr;
@@ -19,39 +97,6 @@
     height: 320px;
   }
 
-  .map-workspace {
-    grid-template-columns: 1fr;
-  }
-
-  .map-telemetry {
-    border-left: none;
-    border-top: 1px solid var(--border-glass);
-  }
-
-  .solutions-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .events-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .pledge-cards-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .pledge-form-row {
-    grid-template-columns: 1fr 1fr;
-  }
-  .pledge-form-row button {
-    grid-column: span 2;
-  }
-
-  .simulator-grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
@@ -59,36 +104,7 @@
 
   .footer-top {
     grid-template-columns: 1fr 1fr;
-  }
-
-  .bento-grid {
-    grid-template-columns: repeat(6, 1fr);
-  }
-  .col-12 { grid-column: span 6; }
-  .col-8 { grid-column: span 6; }
-  .col-7 { grid-column: span 6; }
-  .col-6 { grid-column: span 6; }
-  .col-5 { grid-column: span 6; }
-  .col-4 { grid-column: span 3; }
-  .col-3 { grid-column: span 3; }
-}
-
-/* Tablet Portrait & Large Phones (<= 768px) */
-@media (max-width: 768px) {
-  :root {
-    --header-height: 72px;
-  }
-
-  .nav-links, .nav-actions .hud-btn:not(#sound-toggle) {
-    display: none;
-  }
-
-  .mobile-toggle {
-    display: flex;
-  }
-
-  .hero-sidebar {
-    grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
 
   .heat-split-header {
@@ -96,8 +112,58 @@
     gap: 1.5rem;
   }
 
+  .pledge-form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .pledge-input--wide {
+    grid-column: span 2;
+  }
+  .pledge-submit-btn {
+    grid-column: span 2;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. TABLET PORTRAIT & LARGE PHONES (<= 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 68px;
+  }
+
+  .header-wrapper {
+    top: 0.65rem;
+    padding: 0 0.85rem;
+  }
+
+  .header-nav {
+    max-width: 100%;
+    padding: 0.45rem 0.85rem 0.45rem 1.1rem;
+  }
+
+  .brand-logo {
+    font-size: 1.18rem;
+    gap: 0.5rem;
+  }
+
+  .hero-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-main-card {
+    padding: clamp(1.6rem, 4vw, 2.5rem);
+  }
+
+  /* Thermal Comparison Slider */
   .thermal-slider-container {
-    height: 340px;
+    height: 320px;
+    margin-bottom: 2rem;
+  }
+
+  .slider-badge {
+    font-size: 0.72rem;
+    padding: 0.35rem 0.75rem;
+    bottom: 1rem;
   }
 
   .uhi-causes-grid {
@@ -120,11 +186,74 @@
     grid-template-columns: 1fr;
   }
 
-  .pledge-form-row {
+  /* Map topbar and viewport */
+  .map-hud-topbar {
+    padding: 1rem 1.25rem;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .map-hud-controls {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .map-search-wrapper {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .map-filter-group {
+    display: flex;
+    overflow-x: auto;
+    width: 100%;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 3px;
+  }
+  .map-filter-group::-webkit-scrollbar {
+    display: none;
+  }
+
+  #world-map,
+  .map-viewport-wrapper {
+    min-height: 420px;
+    height: 420px;
+  }
+
+  .quick-cities-bar {
+    top: 0.6rem;
+    left: 0.6rem;
+    right: 0.6rem;
+    gap: 0.4rem;
+  }
+
+  .city-chip {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.7rem;
+  }
+
+  .world-map-legend {
+    bottom: 0.8rem;
+    left: 0.8rem;
+    max-width: 250px;
+    padding: 0.6rem 0.9rem;
+    font-size: 0.75rem;
+  }
+
+  .telemetry-metrics-grid {
     grid-template-columns: 1fr;
   }
-  .pledge-form-row button {
-    grid-column: span 1;
+
+  .quiz-container {
+    padding: 2rem 1.25rem;
+  }
+
+  .section-rounded {
+    padding: 2.2rem 1.15rem;
+    border-radius: var(--radius-lg);
   }
 
   .footer-top {
@@ -138,85 +267,267 @@
     text-align: center;
   }
 
-  .map-hud-topbar {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1rem;
-  }
-
-  .map-search-wrapper {
-    width: 100%;
-    min-width: 100%;
-  }
-
-  .map-filter-group {
-    overflow-x: auto;
-    width: 100%;
-    scrollbar-width: none;
-  }
-  .map-filter-group::-webkit-scrollbar {
-    display: none;
-  }
-
-  #world-map,
-  .map-viewport-wrapper {
-    min-height: 480px;
-    height: 480px;
-  }
-
-  .world-map-legend {
-    bottom: 0.8rem;
-    left: 0.8rem;
-    max-width: 240px;
-    padding: 0.6rem 0.9rem;
-  }
-
-  .quick-cities-bar {
-    top: 0.6rem;
-    left: 0.6rem;
-    right: 0.6rem;
-  }
-
-  .telemetry-metrics-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .quiz-container {
-    padding: 2rem 1.5rem;
-  }
-
-  .section-rounded {
-    padding: 2.5rem 1.25rem;
-    border-radius: var(--radius-lg);
+  /* Modal responsive */
+  .modal-box {
+    max-width: min(520px, 94vw);
+    padding: 1.8rem 1.4rem;
   }
 }
 
-/* Extra Small Phones (<= 480px) */
+/* --------------------------------------------------------------------------
+   4. SMALL MOBILE SCREENS (<= 640px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  /* Header: Hide UHI badge and CTA button so only Logo + Sound + Menu remain */
+  .brand-logo .logo-badge {
+    display: none;
+  }
+
+  .nav-actions .nav-cta-btn {
+    display: none;
+  }
+
+  .sample-data-notice-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  /* Thermal Slider badges on mobile: prevent overlap */
+  .slider-badge--cool {
+    left: 0.6rem;
+    bottom: 0.6rem;
+  }
+  .slider-badge--hot {
+    right: 0.6rem;
+    bottom: 0.6rem;
+  }
+
+  /* Map: 380px height provides smooth scrolling past map on phones */
+  #world-map,
+  .map-viewport-wrapper {
+    min-height: 380px;
+    height: 380px;
+  }
+
+  .world-map-legend {
+    display: none; /* Preserves map touch surface area on phones */
+  }
+
+  /* Pledge form: pure 1-column */
+  .pledge-form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .pledge-input--wide,
+  .pledge-submit-btn {
+    width: 100%;
+  }
+
+  /* Newsletter form */
+  .newsletter-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+  .newsletter-input,
+  .newsletter-form .btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Horizontal scrolling filter pills in solutions and community */
+  .tab-pills {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.5rem;
+  }
+  .tab-pills::-webkit-scrollbar {
+    display: none;
+  }
+  .tab-pill {
+    flex-shrink: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. EXTRA SMALL PHONES (<= 480px down to 320px)
+   -------------------------------------------------------------------------- */
 @media (max-width: 480px) {
+  .header-wrapper {
+    top: 0.4rem;
+    padding: 0 0.4rem;
+  }
+
+  .header-nav {
+    padding: 0.35rem 0.65rem 0.35rem 0.85rem;
+  }
+
+  .brand-logo {
+    font-size: 1.05rem;
+  }
+
+  .hamburger-btn {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.72rem;
+  }
+
+  .hero-section {
+    padding-top: calc(var(--header-height) + 0.8rem);
+    padding-bottom: 1.5rem;
+  }
+
+  .hero-main-card {
+    padding: 1.4rem 0.95rem;
+    border-radius: 18px;
+  }
+
   .hero-cta-group {
     flex-direction: column;
     width: 100%;
+    gap: 0.75rem;
   }
 
   .hero-cta-group .btn {
     width: 100%;
   }
 
-  .stat-huge {
-    font-size: 2.8rem;
+  .hero-visual-card {
+    height: 240px;
+    border-radius: 18px;
   }
 
   .hero-stat-card {
     flex-direction: column;
     align-items: flex-start;
+    padding: 1.2rem;
+    gap: 1rem;
+    border-radius: 18px;
   }
 
-  .nav-drawer {
-    max-width: 100%;
-    padding: 1.5rem 1.2rem;
-  }
-
-  .map-legend {
+  .hero-stat-card div[style*="height: 60px"] {
     display: none;
+  }
+
+  /* Standard Vertical Sidebar: Optimal width on narrow phones */
+  .nav-drawer,
+  .mobile-drawer {
+    width: 100%;
+    max-width: 100%;
+    padding: 1.1rem 0.95rem 1rem;
+    background: #ffffff;
+    background: linear-gradient(180deg, #ffffff 0%, #f6faf7 100%);
+  }
+
+  .nav-drawer-links,
+  .mobile-drawer-links {
+    max-height: calc(100vh - 135px);
+    max-height: calc(100dvh - 135px);
+    gap: 0.25rem;
+    margin: 0.8rem 0;
+  }
+
+  .nav-drawer-item {
+    padding: 0.5rem 0.65rem;
+    gap: 0.75rem;
+    border-radius: 10px;
+    background: transparent;
+    border: none;
+    border-left: 3px solid transparent;
+  }
+
+  .nav-drawer-item.active {
+    background: #eaf6ee;
+    border-left-color: #10b981;
+  }
+
+  .nav-drawer-icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 10px;
+    background: #eef7f1;
+  }
+
+  .nav-drawer-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .nav-drawer-title {
+    font-size: 0.92rem;
+    color: #0c2616;
+  }
+
+  .nav-drawer-sub {
+    font-size: 0.62rem;
+    color: #447758;
+  }
+
+  .nav-drawer-item.active .nav-drawer-title {
+    color: #064e3b;
+  }
+
+  /* Typography on narrow phones */
+  h1 {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+  }
+  h2 {
+    font-size: clamp(1.4rem, 6.5vw, 1.9rem);
+  }
+  .stat-huge {
+    font-size: 2.3rem;
+  }
+
+  /* Simulator */
+  .simulator-wrapper {
+    padding: 1.4rem 0.95rem;
+    border-radius: 18px;
+  }
+
+  .sim-result-card {
+    padding: 1.1rem;
+  }
+  .sim-result-val {
+    font-size: 1.9rem;
+  }
+
+  /* Quiz */
+  .quiz-container {
+    padding: 1.5rem 0.95rem;
+    border-radius: 18px;
+  }
+  .quiz-option-btn {
+    padding: 0.85rem 0.95rem;
+  }
+  .quiz-option-text {
+    font-size: 0.88rem;
+  }
+  .quiz-score-circle {
+    width: 105px;
+    height: 105px;
+  }
+  .quiz-score-val {
+    font-size: 2.1rem;
+  }
+
+  /* Contact */
+  .contact-form {
+    padding: 1.4rem 0.95rem;
+    border-radius: 18px;
+  }
+
+  .toast-notice {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+    font-size: 0.82rem;
+    padding: 0.75rem 1rem;
   }
 }

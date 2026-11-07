@@ -679,6 +679,14 @@
     // Render Markers
     renderMarkers();
 
+    // Invalidate map size on window resize/orientation change for mobile & laptop responsiveness
+    window.addEventListener('resize', () => {
+      if (map) map.invalidateSize();
+    });
+    setTimeout(() => {
+      if (map) map.invalidateSize();
+    }, 400);
+
     // Populate initial telemetry sidebar with first city
     if (sampleHotspots.length > 0) {
       updateTelemetry(sampleHotspots[0]);

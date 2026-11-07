@@ -12,6 +12,8 @@
   const drawerCloseBtn = document.getElementById('drawer-close');
   const drawerLinks = document.querySelectorAll('.mobile-drawer-link');
 
+  const drawerItems = document.querySelectorAll('.nav-drawer-item');
+
   function openDrawer() {
     if (mobileDrawer) mobileDrawer.classList.add('open');
     if (drawerBackdrop) drawerBackdrop.classList.add('open');
@@ -40,20 +42,26 @@
   }
 
   if (drawerCloseBtn) {
-    drawerCloseBtn.addEventListener('click', () => {
+    drawerCloseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       closeDrawer();
       if (window.CoolCityAudio) window.CoolCityAudio.playClick(480);
     });
   }
 
+  // Clicking outside drawer (on dark transparent overlay) closes sidebar
   if (drawerBackdrop) {
     drawerBackdrop.addEventListener('click', () => {
       closeDrawer();
     });
   }
 
+  // Selecting a menu item closes sidebar & highlights active item
   drawerLinks.forEach(link => {
     link.addEventListener('click', (e) => {
+      drawerItems.forEach(item => item.classList.remove('active'));
+      link.classList.add('active');
+
       closeDrawer();
       if (window.CoolCityAudio) window.CoolCityAudio.playClick(640);
 
@@ -74,7 +82,7 @@
     }
   });
 
-  // Active Navigation on Scroll
+  // Active Navigation on Scroll (updates desktop links and sidebar items)
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
 
@@ -91,6 +99,19 @@
           link.classList.remove('active');
           if (link.getAttribute('href') === `#${sectionId}`) {
             link.classList.add('active');
+          }
+        });
+
+        drawerItems.forEach(item => {
+          const href = item.getAttribute('href');
+          if (href === `#${sectionId}`) {
+            // For #map, don't necessarily override Global View if clicked
+            if (sectionId === 'map' && item.getAttribute('data-action') === 'global-view') {
+              // keep state
+            } else {
+              drawerItems.forEach(i => i.classList.remove('active'));
+              item.classList.add('active');
+            }
           }
         });
       }

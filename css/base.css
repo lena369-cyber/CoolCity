@@ -52,44 +52,48 @@ body {
   color: var(--color-forest-950);
 }
 
-/* Typography Scale */
+/* Typography Scale - Responsively Clamped */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 800;
-  line-height: 1.05;
+  line-height: 1.08;
   letter-spacing: -0.03em;
   color: var(--color-white);
   text-wrap: balance;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 h1 {
-  font-size: clamp(2.8rem, 7vw, 6.2rem);
+  font-size: clamp(1.9rem, 6vw, 5.6rem);
   text-transform: uppercase;
+  hyphens: auto;
 }
 
 h2 {
-  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  font-size: clamp(1.5rem, 4.2vw, 3.8rem);
   text-transform: uppercase;
   letter-spacing: -0.025em;
 }
 
 h3 {
-  font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+  font-size: clamp(1.2rem, 2.6vw, 2.1rem);
   letter-spacing: -0.02em;
 }
 
 h4 {
-  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-size: clamp(1.05rem, 2vw, 1.45rem);
 }
 
 p {
   color: var(--color-text-muted);
-  font-size: 1.05rem;
-  line-height: 1.7;
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  line-height: 1.65;
+  overflow-wrap: break-word;
 }
 
 p.lead {
-  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  font-size: clamp(1.05rem, 1.8vw, 1.4rem);
   color: var(--color-text-main);
   line-height: 1.5;
   font-weight: 400;
@@ -103,6 +107,7 @@ a {
 
 img, svg, video {
   max-width: 100%;
+  height: auto;
   display: block;
 }
 
@@ -110,6 +115,8 @@ button, input, select, textarea {
   font-family: inherit;
   font-size: inherit;
   color: inherit;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* Layout Container */
@@ -118,20 +125,22 @@ button, input, select, textarea {
   max-width: var(--container-max);
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(1.2rem, 4vw, 3rem);
-  padding-right: clamp(1.2rem, 4vw, 3rem);
+  padding-left: clamp(0.85rem, 3.5vw, 2.8rem);
+  padding-right: clamp(0.85rem, 3.5vw, 2.8rem);
+  box-sizing: border-box;
 }
 
 /* Rounded Rectangular Section Containers (BLITZ Style) */
 .section-rounded {
   background: var(--color-forest-900);
   border: 1px solid var(--border-glass);
-  border-radius: var(--radius-xl);
-  padding: clamp(3rem, 6vw, 6.5rem) clamp(1.5rem, 4vw, 4rem);
-  margin: clamp(2.5rem, 5vw, 5rem) auto;
+  border-radius: clamp(20px, 3.5vw, var(--radius-xl));
+  padding: clamp(1.8rem, 4.5vw, 5.5rem) clamp(0.95rem, 3.2vw, 3.8rem);
+  margin: clamp(1.5rem, 4vw, 4.5rem) auto;
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow-card);
+  box-sizing: border-box;
 }
 
 .section-rounded--light {

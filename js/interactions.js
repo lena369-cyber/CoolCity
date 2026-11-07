@@ -115,6 +115,16 @@
     if (!container || !afterLayer || !handle) return;
 
     let isDragging = false;
+    const afterImg = afterLayer.querySelector('img');
+
+    function syncImageWidth() {
+      if (afterImg && container) {
+        afterImg.style.width = `${container.offsetWidth}px`;
+      }
+    }
+
+    syncImageWidth();
+    window.addEventListener('resize', syncImageWidth);
 
     function updateSlider(clientX) {
       const rect = container.getBoundingClientRect();
