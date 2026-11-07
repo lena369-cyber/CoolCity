@@ -1,0 +1,222 @@
+/* ==========================================================================
+   COOLCITY — RESPONSIVE STYLES & MEDIA QUERIES
+   ========================================================================== */
+
+/* Laptop & Tablet Landscape (<= 1024px) */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .hero-sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .hero-visual-card {
+    height: 320px;
+  }
+
+  .map-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .map-telemetry {
+    border-left: none;
+    border-top: 1px solid var(--border-glass);
+  }
+
+  .solutions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .events-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pledge-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pledge-form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .pledge-form-row button {
+    grid-column: span 2;
+  }
+
+  .simulator-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .bento-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .col-12 { grid-column: span 6; }
+  .col-8 { grid-column: span 6; }
+  .col-7 { grid-column: span 6; }
+  .col-6 { grid-column: span 6; }
+  .col-5 { grid-column: span 6; }
+  .col-4 { grid-column: span 3; }
+  .col-3 { grid-column: span 3; }
+}
+
+/* Tablet Portrait & Large Phones (<= 768px) */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 72px;
+  }
+
+  .nav-links, .nav-actions .hud-btn:not(#sound-toggle) {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: flex;
+  }
+
+  .hero-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .heat-split-header {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .thermal-slider-container {
+    height: 340px;
+  }
+
+  .uhi-causes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .solutions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .simulator-results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pledge-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pledge-form-row {
+    grid-template-columns: 1fr;
+  }
+  .pledge-form-row button {
+    grid-column: span 1;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .map-hud-topbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .map-search-wrapper {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .map-filter-group {
+    overflow-x: auto;
+    width: 100%;
+    scrollbar-width: none;
+  }
+  .map-filter-group::-webkit-scrollbar {
+    display: none;
+  }
+
+  #world-map,
+  .map-viewport-wrapper {
+    min-height: 480px;
+    height: 480px;
+  }
+
+  .world-map-legend {
+    bottom: 0.8rem;
+    left: 0.8rem;
+    max-width: 240px;
+    padding: 0.6rem 0.9rem;
+  }
+
+  .quick-cities-bar {
+    top: 0.6rem;
+    left: 0.6rem;
+    right: 0.6rem;
+  }
+
+  .telemetry-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quiz-container {
+    padding: 2rem 1.5rem;
+  }
+
+  .section-rounded {
+    padding: 2.5rem 1.25rem;
+    border-radius: var(--radius-lg);
+  }
+}
+
+/* Extra Small Phones (<= 480px) */
+@media (max-width: 480px) {
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+  }
+
+  .stat-huge {
+    font-size: 2.8rem;
+  }
+
+  .hero-stat-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-drawer {
+    max-width: 100%;
+    padding: 1.5rem 1.2rem;
+  }
+
+  .map-legend {
+    display: none;
+  }
+}

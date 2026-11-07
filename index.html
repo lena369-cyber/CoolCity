@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COOLCITY — Urban Heat Mitigation & Bioclimatic Metropoles</title>
+  <meta name="description" content="COOLCITY is an editorial climate-tech initiative deploying high-albedo envelopes, urban canopy networks, and computational microclimate telemetry to reverse urban heat islands.">
+  
+  <!-- Google Fonts: Syne (Display), Space Grotesk (Heading), Plus Jakarta Sans (Body), JetBrains Mono (Telemetry) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Leaflet.js Interactive Map Stylesheet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+</head>
+<body>
+
+  <!-- ========================================================================
+       STICKY NAVIGATION HEADER (Glass Pill)
+       ======================================================================== -->
+  <header class="header-wrapper">
+    <nav class="header-nav" aria-label="Main Navigation">
+      <a href="#home" class="brand-logo" aria-label="COOLCITY Homepage">
+        COOLCITY <span class="dot" aria-hidden="true"></span>
+        <span class="logo-badge">UHI OS v2.6</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About UHI</a></li>
+        <li><a href="#map" class="nav-link">Heat Map</a></li>
+        <li><a href="#solutions" class="nav-link">Solutions</a></li>
+        <li><a href="#impact" class="nav-link">Impact</a></li>
+        <li><a href="#community" class="nav-link">Community</a></li>
+        <li><a href="#quiz" class="nav-link">Eco Quiz</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Audio Telemetry Toggle Button -->
+        <button id="sound-toggle" class="hud-btn" type="button" title="Toggle Audio Telemetry Feedback" aria-label="Toggle Sound Effects">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+        </button>
+
+        <a href="#map" class="btn btn-primary btn-sm">
+          Simulate Heat <span class="icon-arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <!-- Hamburger Menu Toggle (Mobile & Desktop) -->
+        <button id="mobile-toggle" class="hamburger-btn" type="button" aria-label="Toggle Navigation Menu">
+          <span class="hamburger-lines">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <span>Menu</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Dim Backdrop Overlay -->
+  <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+
+  <!-- Modern Icon-Based Slide-in Navigation Drawer (Works on Mobile & Desktop) -->
+  <aside id="mobile-drawer" class="nav-drawer" aria-label="Main Navigation Menu">
+    <div>
+      <!-- Drawer Header -->
+      <div class="drawer-header">
+        <a href="#home" class="brand-logo" style="font-size: 1.25rem;">
+          COOLCITY <span class="dot"></span>
+        </a>
+        <button id="drawer-close" class="drawer-close-btn" type="button" aria-label="Close Navigation Menu">
+          ✕
+        </button>
+      </div>
+
+      <!-- Icon-Based Menu Items (9 items with matching Lucide icons) -->
+      <ul class="nav-drawer-links">
+        
+        <!-- 1. Home — house icon -->
+        <li>
+          <a href="#home" class="nav-drawer-item mobile-drawer-link">
+            <span class="nav-drawer-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#123820" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/>
+                <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              </svg>
+            </span>
+            <div class="nav-drawer-label">
+              <span class="nav-drawer-title">Home</span>
+              <span class="nav-drawer-sub">01 // Overview</span>
+            </div>
+            <span class="nav-drawer-arrow">→</span>
+          </a>
+        </li>
+
+        <!-- 2. Global View — globe icon -->
+        <li>
+          <a href="#map" class="nav-drawer-item mobile-drawer-link" data-action="global-view">
+            <span class="nav-drawer-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#123820" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                <path d="M2 12h20"/>
+              </svg>
+            </span>
+            <div class="nav-drawer-label">
+              <span class="nav-drawer-title">Global View</span>
+              <span class="nav-drawer-sub">02 // Earth Overview</span>
+            </div>
+            <span class="nav-drawer-arrow">→</span>
+          </a>
+        </li>
+
+        <!-- 3. Global Heat Map — map icon -->
+        <li>
+          <a href="#map" class="nav-drawer-item mobile-drawer-link">
+            <span class="nav-drawer-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#123820" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/>
+                <path d="M15 5.764v15"/>
+                <path d="M9 3.236v15"/>
+              </svg>
+            </span>
+            <div class="nav-drawer-label">
+              <span class="nav-drawer-title">Global Heat Map</span>
+              <span class="nav-drawer-sub">03 // Hotspot Telemetry</span>
+            </div>
+            <span class="nav-drawer-arrow">→</span>
+          </a>
+        </li>
+
+        <!-- 4. Heat Insights — thermometer-sun icon -->
+        <li>
+          <a href="#about" class="nav-drawer-item mobile-drawer-link">
+            <span class="nav-drawer-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#123820" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 9a4 4 0 0 0-2 7.5"/>
+                <path d="M12 3v2"/>
+                <path d="M6.6 18.4l-1.4 1.4"/>
+                <path d="M20 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/>
+                <path d="M4 13H2"/>
+                <path d="M6.34 7.34 4.93 5.93"/>
+              </svg>
+            </span>
+            <div class="nav-drawer-label">
+              <span class="nav-drawer-title">Heat Insights</span>
+              <span class="nav-drawer-sub">04 // UHI Phenomenon</span>
+            </div>
+            <span class="nav-drawer-arrow">→</span>
+          </a>
+        </li>
+
+        <!-- 5. Green Solutions — leaf icon -->
+        <li>
+          <a href="#solutions" class="nav-drawer-item mobile-drawer-link">
+            <span class="nav-drawer-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#123820" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+              </svg>
+            </span>
+            <div class="nav-drawer-label">
+              <span class="nav-drawer-title">Green Solutions</span>
+              <span class="nav-drawer-sub">05 // Bioclimatic Blueprint</span>
+            </div>
+            <span class="nav-drawer-arrow">→</span>
+          </a>
+        </li>
+
+        <!-- 6. Our Impact — chart-no-axes-combined icon -->
+        <li>
+          <a href="#impact" class="nav-drawer-item mobile-drawer-link">
+            <span class="nav-drawer-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#123820" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 16v5"/>
+                <path d="M16 14v7"/>
+                <path d="M20 10v11"/>
+                <path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15"/>
+                <path d="M4 18v3"/>
+                <path d="M8 14v7"/>
+              </svg>
+            </span>
+            <div class="nav-drawer-label">
+              <span class="nav-drawer-title">Our Impact</span>
+              <span class="nav-drawer-sub">06 // Quantitative Metrics</span>
+            </div>
+            <span class="nav-drawer-arrow">→</span>
+          </a>
+        </li>
+
+        <!-- 7. Community — users icon -->
+        <li>
+          <a href="#community" class="nav-drawer-item mobile-drawer-link">
+            <span class="nav-drawer-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#123820" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </span>
+            <div class="nav-drawer-label">
+              <span class="nav-drawer-title">Community</span>
+              <span class="nav-drawer-sub">07 // Mobilization &amp; Pledges</span>
+            </div>
+            <span class="nav-drawer-arrow">→</span>
+          </a>
+        </li>
+
+        <!-- 8. Eco Quiz — brain icon -->
+        <li>
+          <a href="#quiz" class="nav-drawer-item mobile-drawer-link">
+            <span class="nav-drawer-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#123820" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/>
+                <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/>
+                <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/>
+                <path d="M12 18v4"/>
+                <path d="M12 5V2"/>
+              </svg>
+            </span>
+            <div class="nav-drawer-label">
+              <span class="nav-drawer-title">Eco Quiz</span>
+              <span class="nav-drawer-sub">08 // Heat Diagnostic</span>
+            </div>
+            <span class="nav-drawer-arrow">→</span>
+          </a>
+        </li>
+
+        <!-- 9. Contact Us — mail icon -->
+        <li>
+          <a href="#contact" class="nav-drawer-item mobile-drawer-link">
+            <span class="nav-drawer-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#123820" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+            </span>
+            <div class="nav-drawer-label">
+              <span class="nav-drawer-title">Contact Us</span>
+              <span class="nav-drawer-sub">09 // Transmit Inquiry</span>
+            </div>
+            <span class="nav-drawer-arrow">→</span>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="drawer-footer">
+      <div>STATUS: <span style="color:var(--color-lime-500); font-weight:700;">ACTIVE TELEMETRY</span></div>
+      <div class="live-utc-clock" style="color:var(--color-lime-500);">2026-11-07 00:00:00 UTC</div>
+    </div>
+  </aside>
+
+  <!-- Main Content Wrapper -->
+  <main>
+
+    <!-- ========================================================================
+         SECTION 1: HOME / HERO
+         ======================================================================== -->
+    <section id="home" class="hero-section">
+      <div class="container">
+        
+        <!-- Live Metrics Ticker Tape -->
+        <div class="ticker-wrap ticker-wrap--lime" style="border-radius: var(--radius-pill); margin-bottom: 2rem;">
+          <div class="ticker-track">
+            <span class="ticker-item"><span class="ticker-star">✦</span> URBAN HEAT ISLAND PROTOCOL 2026</span>
+            <span class="ticker-item"><span class="ticker-star">✦</span> PEAK SURFACE REDUCTION: -7.8°C</span>
+            <span class="ticker-item"><span class="ticker-star">✦</span> GLOBAL CANOPY ACCELERATOR ACTIVE</span>
+            <span class="ticker-item"><span class="ticker-star">✦</span> 1,240,000 M² HIGH-ALBEDO RETROFIT COMPLETED</span>
+            <span class="ticker-item"><span class="ticker-star">✦</span> BIOPHILIC CORRIDORS ENGAGED</span>
+            <!-- Duplicate for infinite marquee loop -->
+            <span class="ticker-item"><span class="ticker-star">✦</span> URBAN HEAT ISLAND PROTOCOL 2026</span>
+            <span class="ticker-item"><span class="ticker-star">✦</span> PEAK SURFACE REDUCTION: -7.8°C</span>
+            <span class="ticker-item"><span class="ticker-star">✦</span> GLOBAL CANOPY ACCELERATOR ACTIVE</span>
+            <span class="ticker-item"><span class="ticker-star">✦</span> 1,240,000 M² HIGH-ALBEDO RETROFIT COMPLETED</span>
+            <span class="ticker-item"><span class="ticker-star">✦</span> BIOPHILIC CORRIDORS ENGAGED</span>
+          </div>
+        </div>
+
+        <!-- Asymmetrical Hero Grid -->
+        <div class="hero-grid">
+          
+          <!-- Main Hero Editorial Card -->
+          <article class="hero-main-card">
+            <div>
+              <div class="eyebrow">
+                <span class="eyebrow-dot"></span>
+                <span>[ 01 // METROPOLITAN MICROCLIMATE OS ]</span>
+              </div>
+              <h1 class="hero-title">
+                LOWERING THE CITY’S PULSE.<br>
+                <span class="highlight">RE-ENGINEERING</span> URBAN HEAT.
+              </h1>
+              <p class="hero-description">
+                Asphalt canyons and dark roofs trap blistering thermal radiation, heating cities up to 12°C above rural baselines. COOLCITY deploys computational canopy mapping, high-albedo cool roofs, and biophilic water networks to systematically drop metropolitan surface temperatures.
+              </p>
+            </div>
+
+            <div>
+              <div class="hero-cta-group">
+                <a href="#map" class="btn btn-primary btn-lg">
+                  Launch City Heat Map <span class="icon-arrow">↗</span>
+                </a>
+                <a href="#quiz" class="btn btn-secondary btn-lg">
+                  Test Your Neighborhood <span class="bracket">[ ? ]</span>
+                </a>
+              </div>
+
+              <div style="display: flex; gap: 2rem; margin-top: 2.5rem; border-top: 1px solid var(--border-glass); padding-top: 1.5rem; font-family: var(--font-mono); font-size: 0.82rem; color: var(--color-text-muted);">
+                <div>STATUS: <span style="color:var(--color-lime-500); font-weight:700;">LIVE COOLDOWN ACTIVE</span></div>
+                <div>METRIC: <span style="color:var(--color-white);">SURFACE ΔT TARGET -6.0°C</span></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Hero Sidebar (Visual + Metrics) -->
+          <div class="hero-sidebar">
+            
+            <!-- Bento Visual Card -->
+            <div class="hero-visual-card">
+              <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=80" 
+                   alt="Modern Biophilic Sustainable City Building with Lush Vertical Gardens" 
+                   loading="eager">
+              <div class="hero-visual-overlay">
+                <div class="hero-live-badge">
+                  <span class="eyebrow-dot"></span>
+                  <span>THERMAL INFRARED SCAN // SECTOR 04</span>
+                </div>
+                <div>
+                  <h4 style="font-size: 1.25rem; margin-bottom: 0.3rem;">Bioclimatic Sky Gardens</h4>
+                  <p style="font-size: 0.88rem; color: var(--color-offwhite);">Vertical foliage transpiration cuts ambient façade temperatures by 6.4°C.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bento Stat Card -->
+            <div class="hero-stat-card">
+              <div class="hero-stat-item">
+                <span class="stat-huge" style="font-size: 3.4rem;">-5.8<span class="stat-unit">°C</span></span>
+                <span class="stat-label">Peak Surface Cooling</span>
+              </div>
+              <div style="height: 60px; width: 1px; background: var(--border-glass);"></div>
+              <div class="hero-stat-item">
+                <span class="stat-huge" style="font-size: 3.4rem;">42<span class="stat-unit">%</span></span>
+                <span class="stat-label">Canopy Coverage Goal</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 2: ABOUT URBAN HEAT ISLANDS (UHI)
+         ======================================================================== -->
+    <section id="about" class="container">
+      <div class="section-rounded">
+        
+        <div class="heat-split-header">
+          <div>
+            <div class="eyebrow">
+              <span class="eyebrow-dot"></span>
+              <span>[ 02 // THE PHENOMENON ]</span>
+            </div>
+            <h2>WHAT IS AN URBAN HEAT ISLAND?</h2>
+          </div>
+          <p class="lead">
+            Urban Heat Islands (UHIs) occur when dense concentrations of asphalt roads, concrete towers, and non-reflective bitumen roofs absorb solar energy during the day and re-radiate it slowly throughout the night, trapping sweltering heat pockets.
+          </p>
+        </div>
+
+        <!-- Interactive Before/After Thermal Comparison Slider -->
+        <div style="margin-bottom: 1.2rem; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-text-muted);">
+          <span>INTERACTIVE THERMAL COMPARISON // DRAG SLIDER TO REVEAL TRANSFORMATION</span>
+          <span style="color:var(--color-lime-500);">44.8°C ASPHALT VS 28.2°C CANOPY</span>
+        </div>
+
+        <div id="thermal-slider-wrap" class="thermal-slider-container">
+          <!-- Layer 1: Conventional Asphalt Heat Island (Hot) -->
+          <div class="thermal-layer">
+            <img src="https://images.unsplash.com/photo-1477959858617-67f30bc75b82?auto=format&fit=crop&w=1400&q=80" 
+                 alt="Conventional Urban Concrete Jungle with intense trapped thermal heat"
+                 style="filter: sepia(0.6) saturate(3.5) hue-rotate(-20deg) contrast(1.2);">
+            <div class="slider-badge slider-badge--hot">
+              <span>HOT ASPHALT CANYON // 44.8°C</span>
+            </div>
+          </div>
+
+          <!-- Layer 2: COOLCITY Transformed Green Eco-Canopy (Cool) -->
+          <div id="thermal-layer-after" class="thermal-layer thermal-layer--after">
+            <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1400&q=80" 
+                 alt="COOLCITY Transformed Biophilic Canopy with Shaded Corridors"
+                 style="filter: saturate(1.3) contrast(1.05);">
+            <div class="slider-badge slider-badge--cool">
+              <span>COOLCITY PROTOCOL // 28.2°C (-16.6°C DELTA)</span>
+            </div>
+          </div>
+
+          <!-- Drag Handle -->
+          <div id="thermal-slider-handle" class="slider-handle" aria-label="Drag to compare before and after">
+            <span>↔</span>
+          </div>
+        </div>
+
+        <!-- Causes & Effects Bento Grid -->
+        <div class="uhi-causes-grid">
+          
+          <div class="cause-card">
+            <span class="cause-number">[ 01 ]</span>
+            <h3 style="font-size: 1.35rem;">Low Albedo Thermal Mass</h3>
+            <p>
+              Standard asphalt streets absorb 95% of incoming solar radiation. At solar noon, dark road surfaces routinely exceed 65°C (150°F), turning entire downtown districts into thermal heat batteries.
+            </p>
+          </div>
+
+          <div class="cause-card">
+            <span class="cause-number">[ 02 ]</span>
+            <h3 style="font-size: 1.35rem;">Canopy & Soil Deficit</h3>
+            <p>
+              Replacing trees and porous soil with impervious pavement completely halts natural evaporative cooling (evapotranspiration). A single mature tree transpires up to 400 liters of water daily, acting like a 10-room air conditioner.
+            </p>
+          </div>
+
+          <div class="cause-card">
+            <span class="cause-number">[ 03 ]</span>
+            <h3 style="font-size: 1.35rem;">Waste Heat Trapping</h3>
+            <p>
+              Air conditioning units, traffic exhaust, and industrial machinery vent massive quantities of anthropogenic waste heat directly into tight street canyons, generating a self-reinforcing heating feedback loop.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 3: REAL INTERACTIVE WORLD HEAT MAP (LEAFLET.JS & OPENSTREETMAP)
+         ======================================================================== -->
+    <section id="map" class="container">
+      
+      <!-- Prominent Demonstration / Sample Data Banner (Requirement 12) -->
+      <div class="sample-data-notice-bar" role="alert">
+        <span class="notice-badge">DEMO DATASET</span>
+        <span>⚠️ <strong>NOTE:</strong> Urban heat hotspot values represent simulated educational microclimate profiles for demonstration purposes. These are not real-time satellite measurements.</span>
+      </div>
+
+      <div class="map-hud-wrapper">
+        
+        <!-- HUD Topbar: Search, Filters & Controls -->
+        <div class="map-hud-topbar">
+          <div class="map-hud-title">
+            <span class="eyebrow-dot"></span>
+            <div>
+              <h3 style="font-size: 1.25rem; font-family: var(--font-heading); text-transform: uppercase;">
+                PLANETARY URBAN HEAT WORLD MAP
+              </h3>
+              <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-lime-500); margin-top: 0.2rem;">
+                POWERED BY LEAFLET.JS & OPENSTREETMAP // GLOBAL CONTINENTAL VIEW
+              </div>
+            </div>
+          </div>
+
+          <div class="map-hud-controls">
+            <!-- Search Function for Countries & Cities (Requirement 8) -->
+            <div class="map-search-wrapper">
+              <div class="map-search-box">
+                <input type="text" id="world-map-search" class="map-search-input" placeholder="Search country or city (e.g. Tokyo, Spain, Phoenix)..." autocomplete="off" aria-label="Search countries and cities on world map">
+                <button type="button" id="world-search-btn" class="map-search-btn" aria-label="Submit search">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+              </div>
+              <div id="world-search-dropdown" class="map-search-dropdown" role="listbox"></div>
+            </div>
+
+            <!-- Heat Zone Filter Pills (Requirement 5) -->
+            <div class="map-filter-group" role="group" aria-label="Filter heat zones">
+              <button class="map-filter-pill active" data-filter="all" type="button">All [31]</button>
+              <button class="map-filter-pill" data-filter="critical" type="button">🔴 Critical (&gt;42°C)</button>
+              <button class="map-filter-pill" data-filter="elevated" type="button">🟠 Elevated (36-41°C)</button>
+              <button class="map-filter-pill" data-filter="resilient" type="button">🟢 Resilient (&lt;35°C)</button>
+            </div>
+
+            <!-- Full World View Reset Button (Requirement 11) -->
+            <button id="world-reset-btn" class="map-reset-btn" type="button" title="Reset to Full World View">
+              <span>🌍</span> Full World
+            </button>
+
+            <!-- Base Layer Switcher -->
+            <button id="map-base-toggle" class="map-reset-btn" type="button" title="Switch OpenStreetMap Layer">
+              Dark Cyber OSM
+            </button>
+          </div>
+        </div>
+
+        <!-- Interactive Map Workspace: Left Map, Right Telemetry Panel -->
+        <div class="map-workspace">
+          
+          <!-- Left: Leaflet Interactive Map Viewport with Legend & Quick Chips -->
+          <div class="map-viewport-wrapper">
+            
+            <!-- Quick Jump City Chips -->
+            <div class="quick-cities-bar" aria-label="Quick jump to sample cities">
+              <button class="city-chip" data-spot-id="kuwait-city" type="button">
+                <span class="city-chip-dot" style="background:#ef4444;"></span> Kuwait City (48.9°C)
+              </button>
+              <button class="city-chip" data-spot-id="new-delhi" type="button">
+                <span class="city-chip-dot" style="background:#ef4444;"></span> New Delhi (46.8°C)
+              </button>
+              <button class="city-chip" data-spot-id="phoenix" type="button">
+                <span class="city-chip-dot" style="background:#ef4444;"></span> Phoenix, USA (46.4°C)
+              </button>
+              <button class="city-chip" data-spot-id="seville" type="button">
+                <span class="city-chip-dot" style="background:#ef4444;"></span> Seville, Spain (44.2°C)
+              </button>
+              <button class="city-chip" data-spot-id="cairo" type="button">
+                <span class="city-chip-dot" style="background:#ef4444;"></span> Cairo, Egypt (44.5°C)
+              </button>
+              <button class="city-chip" data-spot-id="tokyo" type="button">
+                <span class="city-chip-dot" style="background:#f97316;"></span> Tokyo, Japan (38.4°C)
+              </button>
+              <button class="city-chip" data-spot-id="singapore" type="button">
+                <span class="city-chip-dot" style="background:#10b981;"></span> Singapore (30.2°C)
+              </button>
+              <button class="city-chip" data-spot-id="medellin" type="button">
+                <span class="city-chip-dot" style="background:#10b981;"></span> Medellín, Colombia (28.7°C)
+              </button>
+              <button class="city-chip" data-spot-id="vienna" type="button">
+                <span class="city-chip-dot" style="background:#10b981;"></span> Vienna, Austria (28.1°C)
+              </button>
+              <button class="city-chip" data-spot-id="vancouver" type="button">
+                <span class="city-chip-dot" style="background:#10b981;"></span> Vancouver, Canada (26.1°C)
+              </button>
+            </div>
+
+            <!-- The Real Leaflet.js OpenStreetMap Container -->
+            <div id="world-map" aria-label="Interactive Leaflet OpenStreetMap of the World"></div>
+
+            <!-- Map Legend (Requirement 7) -->
+            <aside class="world-map-legend" aria-label="World Heat Map Legend">
+              <h5>[ MAP LEGEND // SAMPLE ZONES ]</h5>
+              <div class="legend-items">
+                <div class="legend-item">
+                  <span class="legend-dot legend-dot--red"></span>
+                  <span><strong>Critical Hotspot:</strong> &gt; 42.0°C [Sample]</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-dot legend-dot--orange"></span>
+                  <span><strong>Elevated Zone:</strong> 36.0°C – 41.9°C [Sample]</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-dot legend-dot--green"></span>
+                  <span><strong>Biophilic Resilient:</strong> &lt; 35.0°C [Sample]</span>
+                </div>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 0.68rem; color: #ffdd59; margin-top: 0.6rem; border-top: 1px solid var(--border-glass); padding-top: 0.4rem;">
+                * Demonstration heat data for microclimate simulation
+              </div>
+            </aside>
+
+          </div>
+
+          <!-- Right: Telemetry Inspector Panel (Requirement 6) -->
+          <div class="map-telemetry">
+            <div>
+              <div class="telemetry-header">
+                <div style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--color-lime-500); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem;">
+                  [ LOCATION INSPECTOR // SAMPLE TELEMETRY ]
+                </div>
+                <div id="telem-category-badge" class="popup-badge popup-badge--critical">
+                  Critical Heat Hotspot [Sample]
+                </div>
+                <h3 id="telem-city-name" class="telemetry-district-title">Kuwait City</h3>
+                <p id="telem-country-name" style="font-size: 0.88rem; color: var(--color-text-muted);">
+                  Kuwait // Asia
+                </p>
+              </div>
+
+              <!-- Live Temperature & Reductions -->
+              <div class="telemetry-metrics-grid">
+                
+                <div class="telemetry-metric-box">
+                  <div class="stat-label">Sample Surface Temp</div>
+                  <div class="telemetry-temp-display">
+                    <span id="telem-temp-val" class="telemetry-temp-now">48.9°C</span>
+                  </div>
+                  <div id="telem-temp-delta" class="telemetry-temp-delta">+9.2°C UHI Anomaly</div>
+                </div>
+
+                <div class="telemetry-metric-box">
+                  <div class="stat-label">Population Exposed</div>
+                  <div id="telem-pop-val" style="font-family:var(--font-heading); font-weight:700; font-size:1.3rem; color:#fff; margin-top:0.4rem;">
+                    3.1 Million
+                  </div>
+                  <div style="font-family:var(--font-mono); font-size:0.75rem; color:#ffdd59; margin-top:0.2rem;">
+                    [SIMULATED ESTIMATE]
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Secondary Metrics: Canopy & Albedo -->
+              <div style="display:flex; justify-content:space-between; background:var(--color-forest-850); border:1px solid var(--border-glass); border-radius:var(--radius-md); padding:0.85rem 1.2rem; margin-bottom:1.2rem; font-family:var(--font-mono); font-size:0.82rem;">
+                <div>TREE CANOPY: <span id="telem-canopy-val" style="color:var(--color-lime-500); font-weight:700;">3%</span></div>
+                <div>SURFACE ALBEDO: <span id="telem-albedo-val" style="color:var(--color-lime-500); font-weight:700;">0.12</span></div>
+              </div>
+
+              <!-- Thermal Drivers Breakdown -->
+              <div class="telemetry-info-row">
+                <h5>Thermal Drivers & Urban Mass:</h5>
+                <p id="telem-drivers-text">
+                  Extreme solar radiation, low vegetation cover, heavy air-conditioning heat rejection into street canyons.
+                </p>
+              </div>
+
+              <!-- Recommended Bioclimatic Solutions -->
+              <div class="telemetry-info-row">
+                <h5>Bioclimatic Cooling Prescription:</h5>
+                <p id="telem-solutions-text">
+                  Mandatory high-albedo white roof membranes, district cooling systems, and misted shade corridors.
+                </p>
+              </div>
+            </div>
+
+            <!-- Action buttons -->
+            <div style="border-top:1px solid var(--border-glass); padding-top:1.2rem; display:flex; gap:0.8rem;">
+              <button id="telem-fly-btn" class="btn btn-primary btn-sm" type="button" style="width:100%;">
+                Focus On Map ↗
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 4: SUSTAINABLE SOLUTIONS
+         ======================================================================== -->
+    <section id="solutions" class="container">
+      <div class="section-rounded">
+        
+        <div style="max-width: 800px; margin-bottom: 2.5rem;">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            <span>[ 04 // BIOCLIMATIC BLUEPRINT ]</span>
+          </div>
+          <h2>ENGINEERED SOLUTIONS FOR CLIMATE-RESILIENT CITIES.</h2>
+          <p class="lead" style="margin-top: 1rem;">
+            Discover our high-efficiency urban cooling portfolio. Each solution combines biophilic engineering with advanced reflective material science to slash ambient temperatures without requiring energy inputs.
+          </p>
+        </div>
+
+        <!-- Filter Pills -->
+        <div class="tab-pills">
+          <button class="tab-pill solution-filter-pill active" data-solution-cat="all" type="button">All Solutions [06]</button>
+          <button class="tab-pill solution-filter-pill" data-solution-cat="roofs" type="button">Cool Roofs</button>
+          <button class="tab-pill solution-filter-pill" data-solution-cat="canopy" type="button">Urban Canopy</button>
+          <button class="tab-pill solution-filter-pill" data-solution-cat="water" type="button">Blue Infrastructure</button>
+          <button class="tab-pill solution-filter-pill" data-solution-cat="pavements" type="button">Cool Pavements</button>
+        </div>
+
+        <!-- Solutions Cards Grid -->
+        <div class="solutions-grid">
+          
+          <!-- Card 1: Cool Roofs -->
+          <article class="solution-card" data-solution-cat="roofs">
+            <div class="solution-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1508873696983-2df5703bc225?auto=format&fit=crop&w=800&q=80" 
+                   alt="Reflective high-albedo commercial white rooftop coating" 
+                   loading="lazy">
+              <span class="solution-cooling-tag">-28°C SURFACE</span>
+            </div>
+            <div class="solution-body">
+              <div>
+                <span class="eyebrow" style="margin-bottom:0.6rem; padding:0.2rem 0.6rem; font-size:0.72rem;">ALBEDO INDEX: 0.88</span>
+                <h3 style="font-size: 1.4rem; margin-bottom: 0.6rem;">High-Albedo Reflective Roofs</h3>
+                <p style="font-size: 0.95rem;">
+                  Ultra-white elastomeric coatings engineered with titanium dioxide nanoparticles reflect over 85% of solar radiation back into space, preventing heat from sinking into the building structure.
+                </p>
+              </div>
+              <div class="solution-meta">
+                <span>EFFICIENCY: ★★★★★</span>
+                <span>ROI: 18 MONTHS</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2: Urban Canopy -->
+          <article class="solution-card" data-solution-cat="canopy">
+            <div class="solution-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80" 
+                   alt="Dense continuous green tree canopy over city street" 
+                   loading="lazy">
+              <span class="solution-cooling-tag">-4.5°C AMBIENT</span>
+            </div>
+            <div class="solution-body">
+              <div>
+                <span class="eyebrow" style="margin-bottom:0.6rem; padding:0.2rem 0.6rem; font-size:0.72rem;">TRANSPIRATION ENGINE</span>
+                <h3 style="font-size: 1.4rem; margin-bottom: 0.6rem;">Continuous Street Tree Canopies</h3>
+                <p style="font-size: 0.95rem;">
+                  Strategically planting broadleaf native shade trees blocks direct solar radiation from penetrating sidewalks while evaporative transpiration cools ambient microclimates by up to 4.5°C.
+                </p>
+              </div>
+              <div class="solution-meta">
+                <span>EFFICIENCY: ★★★★★</span>
+                <span>LIFESPAN: 60+ YRS</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3: Water & Bioswales -->
+          <article class="solution-card" data-solution-cat="water">
+            <div class="solution-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80" 
+                   alt="Urban bioswale rain garden wetland buffer" 
+                   loading="lazy">
+              <span class="solution-cooling-tag">-3.2°C EVAPORATIVE</span>
+            </div>
+            <div class="solution-body">
+              <div>
+                <span class="eyebrow" style="margin-bottom:0.6rem; padding:0.2rem 0.6rem; font-size:0.72rem;">BLUE INFRASTRUCTURE</span>
+                <h3 style="font-size: 1.4rem; margin-bottom: 0.6rem;">Bioswales & Retention Canals</h3>
+                <p style="font-size: 0.95rem;">
+                  Interconnected urban wetlands and vegetated swales filter stormwater runoff, recharge subterranean groundwater aquifers, and dissipate urban heat through natural convective cooling.
+                </p>
+              </div>
+              <div class="solution-meta">
+                <span>EFFICIENCY: ★★★★☆</span>
+                <span>FLOOD RISK: -45%</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4: Biophilic Green Facades -->
+          <article class="solution-card" data-solution-cat="canopy">
+            <div class="solution-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" 
+                   alt="Skyscraper with living vertical green walls and sky terraces" 
+                   loading="lazy">
+              <span class="solution-cooling-tag">-6.2°C FAÇADE</span>
+            </div>
+            <div class="solution-body">
+              <div>
+                <span class="eyebrow" style="margin-bottom:0.6rem; padding:0.2rem 0.6rem; font-size:0.72rem;">VERTICAL BIOPHILIA</span>
+                <h3 style="font-size: 1.4rem; margin-bottom: 0.6rem;">Vertical Sky Forests & Facades</h3>
+                <p style="font-size: 0.95rem;">
+                  Integrated living plant walls shield masonry and glass cladding from thermal solar absorption, creating an insulating thermal buffer that reduces interior air conditioning loads by 35%.
+                </p>
+              </div>
+              <div class="solution-meta">
+                <span>EFFICIENCY: ★★★★☆</span>
+                <span>HVAC SAVINGS: 35%</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 5: Cool Pavements -->
+          <article class="solution-card" data-solution-cat="pavements">
+            <div class="solution-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80" 
+                   alt="Porous permeable cobblestone and cool pavement parking area" 
+                   loading="lazy">
+              <span class="solution-cooling-tag">-18°C ROAD SURFACE</span>
+            </div>
+            <div class="solution-body">
+              <div>
+                <span class="eyebrow" style="margin-bottom:0.6rem; padding:0.2rem 0.6rem; font-size:0.72rem;">PERMEABLE SUBSTRATE</span>
+                <h3 style="font-size: 1.4rem; margin-bottom: 0.6rem;">Porous Reflective Pavements</h3>
+                <p style="font-size: 0.95rem;">
+                  Porous concrete and light-colored interlocking pavers allow rainwater to infiltrate subterranean layers. As trapped moisture evaporates under heat, it naturally cools the pedestrian walking surface.
+                </p>
+              </div>
+              <div class="solution-meta">
+                <span>EFFICIENCY: ★★★★☆</span>
+                <span>RUNOFF: -60%</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 6: Evaporative Misting Plazas -->
+          <article class="solution-card" data-solution-cat="water">
+            <div class="solution-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80" 
+                   alt="Urban biophilic water plaza with shading structures" 
+                   loading="lazy">
+              <span class="solution-cooling-tag">-5.0°C PLAZA DROP</span>
+            </div>
+            <div class="solution-body">
+              <div>
+                <span class="eyebrow" style="margin-bottom:0.6rem; padding:0.2rem 0.6rem; font-size:0.72rem;">CIVIC REFUGE</span>
+                <h3 style="font-size: 1.4rem; margin-bottom: 0.6rem;">Microclimate Cooling Plazas</h3>
+                <p style="font-size: 0.95rem;">
+                  Solar-powered high-pressure ultrasonic misting nozzles combined with lightweight tensile shade sails create instant thermal cooling sanctuaries for pedestrians during peak summer heat emergencies.
+                </p>
+              </div>
+              <div class="solution-meta">
+                <span>EFFICIENCY: ★★★★★</span>
+                <span>HEALTH SAFETY: HIGH</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 5: ENVIRONMENTAL IMPACT STATISTICS & SIMULATOR
+         ======================================================================== -->
+    <section id="impact" class="container">
+      
+      <!-- Top Animated Statistics Counters (BLITZ Bento) -->
+      <div class="bento-grid" style="margin-bottom: 3rem;">
+        
+        <div class="bento-card col-3">
+          <div class="stat-huge counter-animated" data-target="240000" data-prefix="" data-suffix="+">240,000+</div>
+          <div class="stat-label">Native Trees Planted</div>
+          <p style="font-size: 0.85rem; margin-top: 0.8rem;">Targeting 45% canopy density across 14 municipal districts.</p>
+        </div>
+
+        <div class="bento-card col-3 bento-card--lime">
+          <div class="stat-huge" style="color:var(--color-forest-950);">-4.8<span class="stat-unit" style="color:var(--color-forest-950);">°C</span></div>
+          <div class="stat-label" style="color:var(--color-forest-900);">Peak Surface Temp Drop</div>
+          <p style="font-size: 0.85rem; margin-top: 0.8rem; color:var(--color-forest-900);">Measured via Landsat thermal infrared satellite passes.</p>
+        </div>
+
+        <div class="bento-card col-3">
+          <div class="stat-huge counter-animated" data-target="184000" data-prefix="" data-suffix=" MWh">184,000 MWh</div>
+          <div class="stat-label">HVAC Energy Saved Annually</div>
+          <p style="font-size: 0.85rem; margin-top: 0.8rem;">Preventing blackouts during extreme summer grid surges.</p>
+        </div>
+
+        <div class="bento-card col-3">
+          <div class="stat-huge counter-animated" data-target="65" data-prefix="-" data-suffix="%">-65%</div>
+          <div class="stat-label">Heatstroke Hospital Admissions</div>
+          <p style="font-size: 0.85rem; margin-top: 0.8rem;">Protecting vulnerable seniors and outdoor workforce.</p>
+        </div>
+
+      </div>
+
+      <!-- Live Interactive Impact Calculator / Simulator -->
+      <div class="simulator-wrapper">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          <span>[ 05 // QUANTITATIVE IMPACT SIMULATOR ]</span>
+        </div>
+        <h2>MACRO POLICY COOLING CALCULATOR</h2>
+        <p style="color: var(--color-text-muted); margin-bottom: 2rem;">
+          Adjust policy variables to calculate projected surface temperature drops, grid energy conservation, and carbon drawdown across an average city of 1,000,000 citizens.
+        </p>
+
+        <div class="simulator-grid">
+          
+          <!-- Sliders Form Controls -->
+          <div>
+            
+            <div class="range-slider-group">
+              <div class="range-slider-label">
+                <span>Urban Canopy Coverage</span>
+                <span id="sim-canopy-val" class="range-slider-value">25%</span>
+              </div>
+              <input type="range" id="sim-canopy" class="cool-slider" min="10" max="60" value="25" step="1" aria-label="Urban Canopy Coverage">
+              <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.75rem; color:var(--color-text-subtle); margin-top:0.3rem;">
+                <span>10% (Asphalt Heavy)</span>
+                <span>60% (Lush Urban Forest)</span>
+              </div>
+            </div>
+
+            <div class="range-slider-group">
+              <div class="range-slider-label">
+                <span>Cool Roof Retrofit Rate</span>
+                <span id="sim-roofs-val" class="range-slider-value">30%</span>
+              </div>
+              <input type="range" id="sim-roofs" class="cool-slider" min="0" max="100" value="30" step="5" aria-label="Cool Roof Retrofit Rate">
+              <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.75rem; color:var(--color-text-subtle); margin-top:0.3rem;">
+                <span>0% (Standard Bitumen)</span>
+                <span>100% (Full Albedo Coverage)</span>
+              </div>
+            </div>
+
+            <div class="range-slider-group">
+              <div class="range-slider-label">
+                <span>Blue & Green Corridors</span>
+                <span id="sim-corridors-val" class="range-slider-value">35 km</span>
+              </div>
+              <input type="range" id="sim-corridors" class="cool-slider" min="5" max="120" value="35" step="5" aria-label="Green Corridors Length">
+              <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.75rem; color:var(--color-text-subtle); margin-top:0.3rem;">
+                <span>5 km</span>
+                <span>120 km (Connected Web)</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Dynamic Output Results Cards -->
+          <div class="simulator-results-grid">
+            
+            <div class="sim-result-card">
+              <div class="stat-label">Projected Heat Reduction</div>
+              <div id="sim-out-temp" class="sim-result-val">-3.8°C</div>
+              <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--color-text-muted);">Average city-wide microclimate drop</div>
+            </div>
+
+            <div class="sim-result-card">
+              <div class="stat-label">Annual Grid Power Saved</div>
+              <div id="sim-out-energy" class="sim-result-val">115,000 MWh</div>
+              <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--color-text-muted);">Equivalent to 38,000 homes powered</div>
+            </div>
+
+            <div class="sim-result-card">
+              <div class="stat-label">CO2 Sequestered Annually</div>
+              <div id="sim-out-carbon" class="sim-result-val">11,325 T</div>
+              <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--color-text-muted);">Biomass carbon sink growth</div>
+            </div>
+
+            <div class="sim-result-card">
+              <div class="stat-label">ER Heat Emergency Drop</div>
+              <div id="sim-out-health" class="sim-result-val">-44%</div>
+              <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--color-text-muted);">Preventative public health dividend</div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================================================
+         SECTION 6: COMMUNITY ACTIVITIES & PLEDGE WALL
+         ======================================================================== -->
+    <section id="community" class="container">
+      <div class="section-rounded">
+        
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:2rem; margin-bottom: 3rem;">
+          <div>
+            <div class="eyebrow">
+              <span class="eyebrow-dot"></span>
+              <span>[ 06 // GRASSROOTS MOBILIZATION ]</span>
+            </div>
+            <h2>JOIN A LOCAL COOLING ACTION.</h2>
+          </div>
+          <p style="max-width: 480px; color: var(--color-text-muted);">
+            Real urban cooling starts at the street level. Join citizen volunteer squads to coat roofs, plant microforests, and deploy neighborhood thermal sensors.
+          </p>
+        </div>
+
+        <!-- Filter Pills for Activities -->
+        <div class="tab-pills">
+          <button class="tab-pill event-filter-pill active" data-filter="all" type="button">All Actions</button>
+          <button class="tab-pill event-filter-pill" data-filter="trees" type="button">Tree Planting</button>
+          <button class="tab-pill event-filter-pill" data-filter="roofs" type="button">Cool Roof Squad</button>
+          <button class="tab-pill event-filter-pill" data-filter="science" type="button">Citizen Science</button>
+          <button class="tab-pill event-filter-pill" data-filter="workshops" type="button">Workshops</button>
+        </div>
+
+        <!-- Community Events Grid -->
+        <div class="events-grid">
+          
+          <!-- Event 1: Cool Roof Squad -->
+          <article class="event-card" data-category="roofs">
+            <div>
+              <div class="event-date-badge">
+                <span>SAT, NOV 14 // 09:00 AM</span>
+                <span class="event-spots-tag event-spots-count">14 spots left</span>
+              </div>
+              <h3 class="event-title" style="font-size: 1.5rem; margin-top: 1rem; margin-bottom: 0.6rem;">Downtown White Roof Painting Marathon</h3>
+              <p style="font-size: 0.95rem;">
+                Volunteering with city technicians to paint 3 low-income residential flat roofs with reflective elastomeric thermal coatings. Brushes and protective gear provided!
+              </p>
+            </div>
+            <div>
+              <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--color-text-muted); margin-bottom:1.2rem;">
+                LOCATION: 4th St Community Center, Sector 02
+              </div>
+              <button class="btn btn-primary btn-register-event" style="width:100%;" type="button">
+                Register Volunteer Spot <span class="icon-arrow">↗</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Event 2: Pocket Microforest -->
+          <article class="event-card" data-category="trees">
+            <div>
+              <div class="event-date-badge">
+                <span>SUN, NOV 22 // 10:30 AM</span>
+                <span class="event-spots-tag event-spots-count">8 spots left</span>
+              </div>
+              <h3 class="event-title" style="font-size: 1.5rem; margin-top: 1rem; margin-bottom: 0.6rem;">Old Town Miyawaki Microforest Blitz</h3>
+              <p style="font-size: 0.95rem;">
+                Planting 400 dense native saplings using the rapid-growth Miyawaki method to create an ultra-dense cooling pocket forest on a former vacant parking lot.
+              </p>
+            </div>
+            <div>
+              <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--color-text-muted); margin-bottom:1.2rem;">
+                LOCATION: Heritage Park West, Old Town
+              </div>
+              <button class="btn btn-primary btn-register-event" style="width:100%;" type="button">
+                Register Volunteer Spot <span class="icon-arrow">↗</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Event 3: Citizen Sensor Patrol -->
+          <article class="event-card" data-category="science">
+            <div>
+              <div class="event-date-badge">
+                <span>SAT, DEC 05 // 02:00 PM</span>
+                <span class="event-spots-tag event-spots-count">6 spots left</span>
+              </div>
+              <h3 class="event-title" style="font-size: 1.5rem; margin-top: 1rem; margin-bottom: 0.6rem;">Thermal Infrared Sensor Bike Patrol</h3>
+              <p style="font-size: 0.95rem;">
+                Equip your bicycle with mobile IoT thermal and humidity loggers to ride designated street canyon routes and upload high-resolution microclimate data to the COOLCITY open API.
+              </p>
+            </div>
+            <div>
+              <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--color-text-muted); margin-bottom:1.2rem;">
+                LOCATION: Tech Innovation Hub Plaza
+              </div>
+              <button class="btn btn-primary btn-register-event" style="width:100%;" type="button">
+                Register Volunteer Spot <span class="icon-arrow">↗</span>
+              </button>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Community Action Pledge Wall (Interactive Submission) -->
+        <div class="pledge-wall-section">
+          <div style="margin-bottom: 1.8rem;">
+            <div class="eyebrow" style="margin-bottom:0.5rem;">[ LIVE CITIZEN BROADCAST ]</div>
+            <h3 style="font-size: 1.6rem;">COMMUNITY COOLING PLEDGE WALL</h3>
+            <p style="font-size: 0.95rem; color: var(--color-text-muted);">
+              What concrete action are you taking to cool down your block? Make a pledge and broadcast it to your fellow citizens.
+            </p>
+          </div>
+
+          <form id="community-pledge-form" class="pledge-form-row">
+            <input type="text" id="pledge-name" class="pledge-input" placeholder="Your Name or Team" required>
+            <input type="text" id="pledge-district" class="pledge-input" placeholder="District or Postal Code" required>
+            <input type="text" id="pledge-text" class="pledge-input" placeholder="My pledge: (e.g. Planting 2 shade trees in front yard)" required style="grid-column: span 2;">
+            <button type="submit" class="btn btn-primary">
+              Post Pledge ✦
+            </button>
+          </form>
+
+          <!-- Dynamic Pledges Container -->
+          <div id="pledge-cards-container" class="pledge-cards-grid">
+            <!-- Dynamically populated via community.js -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 7: INTERACTIVE ECO QUIZ ("HOW COOL IS YOUR NEIGHBORHOOD?")
+         ======================================================================== -->
+    <section id="quiz" class="container">
+      <div class="quiz-container">
+        
+        <div class="quiz-progress-bar-wrap">
+          <div id="quiz-progress-bar" class="quiz-progress-bar"></div>
+        </div>
+
+        <!-- Active Question View -->
+        <div id="quiz-active-view">
+          <div id="quiz-step-label" class="quiz-question-counter">Question [ 01 // 05 ]</div>
+          <h2 id="quiz-question-title" class="quiz-question-title">
+            What percentage of your street or yard is shaded by mature tree canopy?
+          </h2>
+
+          <div id="quiz-options-list" class="quiz-options-list">
+            <!-- Dynamically populated via quiz.js -->
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-glass); padding-top: 1.5rem;">
+            <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-text-muted);">
+              COOLCITY NEIGHBORHOOD DIAGNOSTIC
+            </span>
+            <button id="quiz-next-btn" class="btn btn-secondary" type="button" disabled>
+              Next Question <span class="icon-arrow">→</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quiz Diagnostic Result View -->
+        <div id="quiz-result-view" class="quiz-result-view">
+          <div id="quiz-result-tier" class="quiz-result-badge">
+            Thermal Heat Sponge (High Vulnerability)
+          </div>
+
+          <div class="quiz-score-circle">
+            <span id="quiz-result-score" class="quiz-score-val">74</span>
+            <span class="quiz-score-max">/ 100 PTS</span>
+          </div>
+
+          <h3 style="font-size: 1.8rem; margin-bottom: 0.8rem;">Neighborhood Cooling Quotient</h3>
+          <p id="quiz-result-desc" style="max-width: 650px; margin: 0 auto 2rem; color: var(--color-text-main); font-size: 1.05rem;">
+            Your neighborhood possesses fragmented green pockets, but broad asphalt streets and unshaded rooftops continue to absorb excessive solar irradiance during peak sun hours.
+          </p>
+
+          <!-- Personalized Recommended Interventions Checklist -->
+          <div style="background: var(--color-forest-850); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 1.8rem; max-width: 680px; margin: 0 auto 2.5rem; text-align: left;">
+            <h4 style="font-family: var(--font-mono); font-size: 0.88rem; color: var(--color-lime-500); text-transform: uppercase; margin-bottom: 1rem;">
+              [ CITIZEN ACTION PRESCRIPTION ]
+            </h4>
+            <ul id="quiz-result-prescription" style="list-style: none; font-size: 0.95rem; color: var(--color-text-muted);">
+              <!-- Injected by quiz.js -->
+            </ul>
+          </div>
+
+          <div style="display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap;">
+            <button id="quiz-restart-btn" class="btn btn-secondary" type="button">
+              Retake Diagnostic ↺
+            </button>
+            <button id="quiz-copy-badge-btn" class="btn btn-primary" type="button">
+              Copy Citizen Badge 📋
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 8: CONTACT SECTION, FAQ & FOOTER
+         ======================================================================== -->
+    <section id="contact" class="container">
+      <div class="section-rounded">
+        
+        <div class="contact-grid">
+          
+          <!-- Left: Contact Details & Telemetry Hotline -->
+          <div class="contact-info-panel">
+            <div>
+              <div class="eyebrow">
+                <span class="eyebrow-dot"></span>
+                <span>[ 08 // CONNECT & COLLABORATE ]</span>
+              </div>
+              <h2>GET IN TOUCH WITH THE COOLCITY MISSION.</h2>
+              <p style="margin-top: 1.2rem; font-size: 1.1rem;">
+                Whether you represent a municipal authority looking for district canopy mapping, a property owner wishing to join our cool roof network, or a passionate citizen scientist — we invite your transmission.
+              </p>
+            </div>
+
+            <div class="contact-channels">
+              <div class="channel-item">
+                <div class="channel-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <div>
+                  <div class="stat-label">DISPATCH EMAIL</div>
+                  <a href="mailto:telemetry@coolcity.earth" style="color:var(--color-white); font-weight:700;">telemetry@coolcity.earth</a>
+                </div>
+              </div>
+
+              <div class="channel-item">
+                <div class="channel-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </div>
+                <div>
+                  <div class="stat-label">METROPOLITAN HQ</div>
+                  <div style="color:var(--color-white); font-weight:700;">Bioclimatic Lab 04, Eco-Corridor Waterfront</div>
+                </div>
+              </div>
+
+              <div class="channel-item">
+                <div class="channel-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+                <div>
+                  <div class="stat-label">OPERATING HOURS (UTC)</div>
+                  <div class="live-utc-clock" style="color:var(--color-lime-500); font-family:var(--font-mono); font-size:0.9rem;">2026-11-07 00:00:00 UTC</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Interactive Contact & Hotspot Report Form -->
+          <form id="main-contact-form" class="contact-form">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Transmit City Inquiry</h3>
+            
+            <div class="form-group">
+              <label for="contact-name" class="form-label">Full Name / Entity</label>
+              <input type="text" id="contact-name" class="form-input" placeholder="e.g. Dr. Maya Lin, City Planning Board" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-email" class="form-label">Transmission Email</label>
+              <input type="email" id="contact-email" class="form-input" placeholder="maya.lin@metropolis.gov" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-category" class="form-label">Collaboration Sector</label>
+              <select id="contact-category" class="form-select">
+                <option value="municipal">Municipal Canopy & Heat Policy</option>
+                <option value="roofs">Commercial Cool Roof Retrofit Partnership</option>
+                <option value="volunteering">Grassroots Citizen Science & Volunteering</option>
+                <option value="press">Academic Research & Media Inquiry</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-message" class="form-label">Inquiry or Hotspot Coordinates</label>
+              <textarea id="contact-message" class="form-textarea" placeholder="Detail your neighborhood heat profile or project coordinates..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+              Send Transmission <span class="icon-arrow">↗</span>
+            </button>
+          </form>
+
+        </div>
+
+        <!-- FAQ Accordion -->
+        <div class="faq-accordion">
+          <div style="margin-bottom: 1rem;">
+            <div class="eyebrow" style="margin-bottom:0.5rem;">[ CLARIFICATIONS ]</div>
+            <h3 style="font-size: 1.8rem;">FREQUENTLY ANSWERED INQUIRIES</h3>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-header">
+              <span class="faq-question">How quickly can a cool roof reduce surface temperatures?</span>
+              <span class="faq-toggle-icon">+</span>
+            </div>
+            <div class="faq-body">
+              <p>Immediately upon application. A high-albedo elastomeric white coating reflects up to 88% of solar irradiance on day one, reducing peak afternoon roof surface temperature from 70°C to less than 38°C instantly.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-header">
+              <span class="faq-question">How does COOLCITY calculate district heat reduction?</span>
+              <span class="faq-toggle-icon">+</span>
+            </div>
+            <div class="faq-body">
+              <p>We synthesize empirical data from NASA Landsat-9 thermal infrared sensors, municipal ground-level IoT weather nodes, and computational fluid dynamics (CFD) models of urban canyons to simulate microclimate cooling.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-header">
+              <span class="faq-question">What is the difference between air temperature and surface temperature?</span>
+              <span class="faq-toggle-icon">+</span>
+            </div>
+            <div class="faq-body">
+              <p>Surface temperature measures how hot materials like asphalt and concrete become under direct solar radiation (often reaching 65°C+). Air temperature measures ambient air at pedestrian level. Cooling the surface prevents heat from transferring into the ambient air.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-header">
+              <span class="faq-question">Can individual tenants or homeowners participate?</span>
+              <span class="faq-toggle-icon">+</span>
+            </div>
+            <div class="faq-body">
+              <p>Yes! Individual homeowners can paint flat roofs white, install permeable driveway pavers, plant native shade trees on south-facing perimeters, and participate in our weekly Citizen Sensor Patrol walks.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       MODAL: EVENT REGISTRATION
+       ======================================================================== -->
+  <div id="register-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-event-name">
+    <div class="modal-box">
+      <button id="register-modal-close" class="modal-close" type="button" aria-label="Close Modal">✕</button>
+      
+      <div class="eyebrow" style="margin-bottom: 0.8rem;">[ CITIZEN REGISTRATION ]</div>
+      <h3 id="modal-event-name" style="font-size: 1.6rem; margin-bottom: 1rem;">Action Registration</h3>
+      <p style="color: var(--color-text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+        Reserve your spot in this community cooling mobilization. Equipment and orientation briefing provided on-site.
+      </p>
+
+      <form id="register-event-form">
+        <div class="form-group">
+          <label for="reg-user-name" class="form-label">Full Name</label>
+          <input type="text" id="reg-user-name" class="form-input" placeholder="Citizen Name" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-user-email" class="form-label">Notification Email</label>
+          <input type="email" id="reg-user-email" class="form-input" placeholder="citizen@domain.com" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-user-phone" class="form-label">Phone (For SMS Coordinates)</label>
+          <input type="tel" id="reg-user-phone" class="form-input" placeholder="+1 (555) 019-2834" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+          Confirm Volunteer Spot ✦
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       FOOTER (BLITZ Architectural Layout)
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      
+      <!-- Newsletter Row -->
+      <div style="background: var(--color-forest-900); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: clamp(2rem, 4vw, 3rem); margin-bottom: 4rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
+        <div>
+          <span class="eyebrow" style="margin-bottom:0.5rem;">[ TELEMETRY BULLETIN ]</span>
+          <h3 style="font-size: 1.8rem;">SUBSCRIBE TO WEEKLY MICROCLIMATE LOGS</h3>
+          <p style="font-size: 0.95rem; color: var(--color-text-muted);">Receive satellite infrared updates, tree canopy grants, and local cooling events.</p>
+        </div>
+        <form id="newsletter-form" style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <input type="email" class="pledge-input" placeholder="Enter your email" required style="min-width: 280px;">
+          <button type="submit" class="btn btn-primary">Subscribe ✦</button>
+        </form>
+      </div>
+
+      <div class="footer-top">
+        
+        <div class="footer-brand">
+          <a href="#home" class="brand-logo" style="font-size: 1.6rem;">
+            COOLCITY <span class="dot"></span>
+          </a>
+          <p>
+            An open-source bioclimatic urban design initiative engineering sustainable cooler cities through microclimate computation and high-albedo infrastructure.
+          </p>
+        </div>
+
+        <div class="footer-column">
+          <h5>Architecture</h5>
+          <ul>
+            <li><a href="#map">District Heat Map</a></li>
+            <li><a href="#about">Urban Heat Islands</a></li>
+            <li><a href="#solutions">Albedo Engineering</a></li>
+            <li><a href="#impact">Impact Modeling</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h5>Action Network</h5>
+          <ul>
+            <li><a href="#community">Community Calendar</a></li>
+            <li><a href="#community">Pledge Board</a></li>
+            <li><a href="#quiz">Neighborhood Diagnostic</a></li>
+            <li><a href="#contact">Citizen Sensor Patrol</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h5>Open Telemetry</h5>
+          <ul>
+            <li><a href="#contact">Municipal Portal</a></li>
+            <li><a href="#contact">NASA Landsat API</a></li>
+            <li><a href="#contact">Privacy Policy</a></li>
+            <li><a href="#contact">Licensing (MIT / CC)</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 COOLCITY PROJECT. ALL RIGHTS RESERVED. // INSPIRED BY BLITZ EDITORIAL SYSTEM.
+        </div>
+        <div style="display: flex; gap: 1.5rem; align-items: center;">
+          <span>STATUS: ALL SENSORS NOMINAL</span>
+          <span class="live-utc-clock" style="color: var(--color-lime-500);">2026-11-07 00:00:00 UTC</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Leaflet.js Interactive World Map Engine -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+  <!-- JavaScript Modules -->
+  <script src="js/interactions.js"></script>
+  <script src="js/heatmap.js"></script>
+  <script src="js/simulator.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/community.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+/* ==========================================================================
+   COOLCITY — VARIABLES & DESIGN SYSTEM (BLITZ EDITORIAL INSPIRATION)
+   ========================================================================== */
+
+:root {
+  /* Brand Palette: Forest Green, Crisp White, Electric Lime */
+  --color-forest-950: #050e08;
+  --color-forest-900: #09170e;
+  --color-forest-850: #0d2216;
+  --color-forest-800: #122d1d;
+  --color-forest-700: #193e29;
+  --color-forest-600: #225337;
+  --color-forest-500: #2d6e49;
+  --color-forest-400: #3f9263;
+
+  /* Electric Lime Accents */
+  --color-lime-500: #c8f331;
+  --color-lime-400: #d4f754;
+  --color-lime-600: #a9d41b;
+  --color-lime-glow: rgba(200, 243, 49, 0.28);
+  --color-lime-soft: rgba(200, 243, 49, 0.12);
+
+  /* Thermal Heat Gradient Colors */
+  --color-heat-extreme: #ef4444;
+  --color-heat-high: #f97316;
+  --color-heat-moderate: #eab308;
+  --color-heat-cool: #10b981;
+  --color-heat-optimal: #06b6d4;
+
+  /* Neutrals & Editorial Monochromes */
+  --color-white: #ffffff;
+  --color-offwhite: #f4f7f2;
+  --color-surface-light: #eef2eb;
+  --color-text-main: #f3f6f1;
+  --color-text-muted: #95a79a;
+  --color-text-subtle: #5f7566;
+  --color-text-dark: #09170e;
+
+  /* Borders & Glassmorphism */
+  --border-subtle: rgba(200, 243, 49, 0.15);
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(200, 243, 49, 0.4);
+  --bg-glass-dark: rgba(13, 34, 22, 0.78);
+  --bg-glass-card: rgba(18, 45, 29, 0.65);
+  --bg-glass-hover: rgba(25, 62, 41, 0.85);
+
+  /* Typography */
+  --font-display: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Geometry & Rounded Corners */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-xl: 38px;
+  --radius-pill: 9999px;
+
+  /* Elevation & Shadows */
+  --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 35px var(--color-lime-glow);
+  --shadow-elevated: 0 20px 45px -15px rgba(0, 0, 0, 0.7);
+
+  /* Transitions */
+  --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout */
+  --container-max: 1360px;
+  --header-height: 84px;
+}
